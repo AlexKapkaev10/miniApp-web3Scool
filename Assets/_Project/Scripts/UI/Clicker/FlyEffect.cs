@@ -12,10 +12,11 @@ namespace _Project.Scripts.UI
         
         public void Fly()
         {
+            Destroy(gameObject, _flyDuration + 0.05f);
             _rectTransform.DOMoveY(_flyValue, _flyDuration)
                 .SetEase(Ease.Linear)
                 .SetRelative(true);
-            _canvasGroup.DOFade(0, _flyDuration); //.OnComplete(()=> Destroy(gameObject));
+            _canvasGroup.DOFade(0, _flyDuration);
         }
     }
 }
