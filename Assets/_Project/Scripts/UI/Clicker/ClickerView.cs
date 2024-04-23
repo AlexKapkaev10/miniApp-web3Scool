@@ -1,4 +1,3 @@
-using System;
 using _Project.Scripts.Audio;
 using _Project.Scripts.Bank;
 using UnityEngine;
@@ -22,7 +21,7 @@ namespace _Project.Scripts.UI
 
         private void Awake()
         {
-            _coin.CoinClick += CoinOnCoinClick;
+            _coin.ClickItem += CoinOnCoinClick;
             _audioController.SetFxClip(SoundMode.ClickCoin);
             _audioController.SetAmbientClip(SoundMode.ClickerAmbient);
             _audioController.PlayAmbientClip();
@@ -30,7 +29,7 @@ namespace _Project.Scripts.UI
 
         private void OnDisable()
         {
-            _coin.CoinClick -= CoinOnCoinClick;
+            _coin.ClickItem -= CoinOnCoinClick;
         }
 
         private void CoinOnCoinClick()
