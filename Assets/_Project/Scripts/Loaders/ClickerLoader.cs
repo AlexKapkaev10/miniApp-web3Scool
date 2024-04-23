@@ -18,13 +18,13 @@ namespace _Project.Scripts.Loaders
         [SerializeField] private float _loadSimulationSpeed = 0.002f;
         
         private IAudioController _audioController;
-        private IViewsFactory _viewsFactory;
+        private IViewsStateMachine _viewsStateMachine;
         
         [Inject]
-        private void Construct(IAudioController audioController, IViewsFactory viewsFactory)
+        private void Construct(IAudioController audioController, IViewsStateMachine viewsStateMachine)
         {
             _audioController = audioController;
-            _viewsFactory = viewsFactory;
+            _viewsStateMachine = viewsStateMachine;
         }
 
         private void Awake()
@@ -40,7 +40,7 @@ namespace _Project.Scripts.Loaders
                 yield return null;
             }
 
-            _viewsFactory.CreateViews();
+            _viewsStateMachine.CreateViews();
             _audioController.SetFxClip(SoundMode.ClickCoin);
             _audioController.SetAmbientClip(SoundMode.ClickerAmbient);
             _audioController.PlayAmbientClip();

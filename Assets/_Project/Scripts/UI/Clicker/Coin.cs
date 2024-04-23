@@ -1,9 +1,7 @@
 using System;
 using DG.Tweening;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace _Project.Scripts.UI
 {
@@ -36,9 +34,10 @@ namespace _Project.Scripts.UI
         public void OnPointerDown(PointerEventData eventData)
         {
             CoinClick?.Invoke();
-            var flyEffect = Instantiate(_flyEffectPrefab, eventData.position, quaternion.identity);
-            flyEffect.transform.SetParent(transform, true);
-            flyEffect.Fly();
+            var flyEffect = Instantiate(_flyEffectPrefab, transform);
+            //var flyEffect = Instantiate(_flyEffectPrefab, eventData.position, Quaternion.identity);
+            //flyEffect.transform.SetParent(transform);
+            flyEffect.Fly(eventData.position);
         }
     }
 }

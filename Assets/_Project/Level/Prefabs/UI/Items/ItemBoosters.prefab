@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 995724839521187935, guid: 662f1f5528667fd419c354e76ab5524c, type: 3}
       propertyPath: m_Name
-      value: ItemBoosters Variant
+      value: ItemBoosters
       objectReference: {fileID: 0}
     - target: {fileID: 2222724434357654662, guid: 662f1f5528667fd419c354e76ab5524c, type: 3}
       propertyPath: m_Pivot.x
@@ -178,7 +178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8999431256158871725, guid: 662f1f5528667fd419c354e76ab5524c, type: 3}
       propertyPath: m_text
-      value: "<B>Busters</b> \n<i>comming soon</i>"
+      value: "<B>Boostes</b> \n<i>comming soon</i>"
       objectReference: {fileID: 0}
     - target: {fileID: 8999431256158871725, guid: 662f1f5528667fd419c354e76ab5524c, type: 3}
       propertyPath: m_fontSize
@@ -208,7 +208,9 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3898954135544408892, guid: 662f1f5528667fd419c354e76ab5524c, type: 3}
+    - {fileID: 3389303714331411590, guid: 662f1f5528667fd419c354e76ab5524c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

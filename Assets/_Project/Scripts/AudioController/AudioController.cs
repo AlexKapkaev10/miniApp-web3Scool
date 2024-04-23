@@ -34,7 +34,15 @@ namespace _Project.Scripts.Audio
         
         public void SetAmbientClip(in SoundMode mode)
         {
-            _audioSourceAmbient.clip = _config.GetClipByMode(mode);
+            var clip =  _config.GetClipByMode(mode);
+            if (clip)
+            {
+                _audioSourceAmbient.clip = clip;
+            }
+            else
+            {
+                _audioSourceAmbient.Stop();
+            }
         }
 
         public void PlayFXClip()
