@@ -16,5 +16,5 @@ MonoBehaviour:
   <PoolCount>k__BackingField: 5
   <AutoExpandPool>k__BackingField: 1
   <EndScaleValue>k__BackingField: 1.02
-  <EndScaleDuration>k__BackingField: 0.03
-  _flyItemOffsetY: 20
+  <EndScaleDuration>k__BackingField: 0.02
+  _flyItemOffsetY: 30

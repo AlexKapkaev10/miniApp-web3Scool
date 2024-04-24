@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AudioControllerConfig
   m_EditorClassIdentifier: 
   <ClickCoinClip>k__BackingField: {fileID: 8300000, guid: d147d9993923b604eb31eb6f4da77c56, type: 3}
-  <ClickerAmbientClip>k__BackingField: {fileID: 8300000, guid: 93b254b98f8a1bc429036eb9fcfa8c2f, type: 3}
+  <ClickerAmbientClip>k__BackingField: {fileID: 0}

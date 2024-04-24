@@ -14,11 +14,12 @@ namespace _Project.Scripts.UI
     
     public class ViewsStateMachine : MonoBehaviour, IViewsStateMachine
     {
-        private ViewsStateMachineConfig _config;
-        private IObjectResolver _resolver;
         private Dictionary<ViewStateType, IViewState> _dictionaryStates;
-        private IViewState _currentViewState;
-        private View _gameInfo;
+        private ViewsStateMachineConfig _config = default;
+        private IObjectResolver _resolver = default;
+        private IViewState _currentViewState = default;
+        private ViewStateType _currentStateType = ViewStateType.None;
+        private View _gameInfo = default;
 
         [Inject]
         private void Construct(IObjectResolver resolver, ViewsStateMachineConfig config)
@@ -45,17 +46,24 @@ namespace _Project.Scripts.UI
 
         public void SwitchStateByType(ViewStateType type)
         {
+            if (_currentStateType == type)
+            {
+                return;
+            }
+            
             if (_currentViewState != null)
             {
                 _currentViewState.Exit();
                 _currentViewState = null;
+                _currentStateType = ViewStateType.None;
             }
 
             if (!_dictionaryStates.TryGetValue(type, out IViewState viewState))
             {
                 return;
             }
-            
+
+            _currentStateType = type;
             _currentViewState = viewState;
             _currentViewState.Enter();
         }
@@ -72,6 +80,7 @@ namespace _Project.Scripts.UI
 
     public enum ViewStateType
     {
+        None,
         Home,
         Activity
     }
