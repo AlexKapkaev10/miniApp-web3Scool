@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/TonConnect/Scenes/TonSDK.Connect.Example.unity
-    guid: c692ef7fd9ea3b349b1b69c7e1e33039
+    path: Assets/_Project/Level/Scenes/Game.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
