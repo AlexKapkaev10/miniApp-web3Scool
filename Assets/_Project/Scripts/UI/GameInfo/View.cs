@@ -12,32 +12,45 @@ namespace _Project.Scripts.UI
         [SerializeField] private float _durationVisible = 0.4f;
         [SerializeField] private bool _ignoreSetVisible = false;
 
-        protected virtual void Start()
+        private Tween _tweener;
+
+        private void OnEnable()
         {
             if (_ignoreSetVisible)
             {
                 return;
             }
+            
             _canvasGroup.alpha = 0f;
-            SetVisible(true);
+            SetEnable();
         }
 
-        protected virtual void OnDestroy()
+        private void SetEnable()
         {
-            DOTween.Kill(_canvasGroup);
+            _tweener = _canvasGroup.DOFade(1, _durationVisible)
+                .SetEase(Ease.Linear)
+                .OnComplete(()=> _tweener = null);
         }
 
-        private void SetVisible(bool isVisible)
+        public void SetDisable()
         {
-            var visibleValue = isVisible ? 1 : 0;
+            _tweener = _canvasGroup.DOFade(0, _durationVisible)
+                .SetEase(Ease.Linear)
+                .OnComplete(()=> Destroy(gameObject));
+        }
 
-            _canvasGroup?.DOFade(visibleValue, _durationVisible)
-                .SetEase(Ease.Linear);
+        private void OnDestroy()
+        {
+            if (_tweener != null)
+            {
+                DOTween.Kill(_tweener);
+            }
         }
     }
 
     public enum ViewType
     {
+        None,
         Character,
         Clicker,
         GameInfo,

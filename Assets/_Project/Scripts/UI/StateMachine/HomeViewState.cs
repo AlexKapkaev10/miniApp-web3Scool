@@ -19,14 +19,16 @@ namespace _Project.Scripts.UI.StateMachine
         public void Enter()
         {
             var character = _resolver.Instantiate(_config.GetViewPrefabByType(ViewType.Character), null);
+            var gameInfo = _resolver.Instantiate(_config.GetViewPrefabByType(ViewType.GameInfo), null);
             _views.Add(character);
+            _views.Add(gameInfo);
         }
 
         public void Exit()
         {
             foreach (var view in _views)
             {
-                UnityEngine.Object.Destroy(view.gameObject);
+                view.SetDisable();
             }
             
             _views.Clear();

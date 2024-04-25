@@ -1,43 +1,57 @@
 using System;
+using _Project.Scripts.Configs;
+using _Project.Scripts.ObjectPoll;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace _Project.Scripts.UI
 {
-    public class Coin : MonoBehaviour, IPointerDownHandler
+    public class Coin : MonoBehaviour, IPointerClickHandler, IClickerItem
     {
-        [SerializeField] private FlyEffect _flyEffectPrefab;
+        public event Action ClickItem;
+        [SerializeField] private ClickerItemConfig _config;
 
-        public event Action CoinClick;
-        private Transform _transform;
-        private Tweener _tweener;
+        private PoolMono<FlyItem> _pool;
+        private Transform _transform = default;
+        private Tweener _tweener = default;
+        private Vector2 _flyItemOffset = default;
+        
+        private float _endScaleValue = default;
+        private float _endScaleDuration = default;
 
         private void Awake()
         {
             _transform = transform;
+            _pool = new PoolMono<FlyItem>(_config.FlyItemPrefab, _config.PoolCount, _transform)
+            {
+                AutoExpand = _config.AutoExpandPool
+            };
+
+            _flyItemOffset = _config.GetFlyItemOffset();
+            _endScaleValue = _config.EndScaleValue;
+            _endScaleDuration = _config.EndScaleDuration;
         }
         
-
         public void ClickAnimation()
         {
             if (_tweener != null)
+            {
                 return;
+            }
 
             _tweener = _transform
-                .DOScale(1.1f, 0.05f)
+                .DOScale(_endScaleValue, _endScaleDuration)
                 .SetLoops(2, LoopType.Yoyo)
                 .SetEase(Ease.Linear)
                 .OnComplete(() => _tweener = null);
         }
-
-        public void OnPointerDown(PointerEventData eventData)
+        
+        public void OnPointerClick(PointerEventData eventData)
         {
-            CoinClick?.Invoke();
-            var flyEffect = Instantiate(_flyEffectPrefab, transform);
-            //var flyEffect = Instantiate(_flyEffectPrefab, eventData.position, Quaternion.identity);
-            //flyEffect.transform.SetParent(transform);
-            flyEffect.Fly(eventData.position);
+            ClickItem?.Invoke();
+            IAnimateItem flyEffect = _pool.GetFreeElement();
+            flyEffect.PlayAnimation(eventData.position + _flyItemOffset);
         }
     }
 }

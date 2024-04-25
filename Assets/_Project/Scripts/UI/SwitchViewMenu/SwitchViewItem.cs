@@ -6,15 +6,27 @@ namespace _Project.Scripts.UI.SwitchViewMenu
 {
     public interface ISwitchViewItem
     {
-        event Action<ViewStateType> SwitchView;
+        event Action<ISwitchViewItem> SwitchView;
+        ViewStateType Type { get; }
+        void SetActive(bool isActive);
     }
     
     public class SwitchViewItem : MonoBehaviour, ISwitchViewItem
     {
-        public event Action<ViewStateType> SwitchView;
+        public event Action<ISwitchViewItem> SwitchView;
         
         [SerializeField] private Button _button;
+        [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private ViewStateType _stateType;
+
+        public ViewStateType Type => _stateType;
+
+        public void SetActive(bool isActive)
+        {
+            var alphaValue = isActive ? 1f : 0f;
+
+            _canvasGroup.alpha = alphaValue;
+        }
 
         private void OnEnable()
         {
@@ -28,7 +40,7 @@ namespace _Project.Scripts.UI.SwitchViewMenu
 
         private void OnClick()
         {
-            SwitchView?.Invoke(_stateType);
+            SwitchView?.Invoke(this);
         }
     }
 }

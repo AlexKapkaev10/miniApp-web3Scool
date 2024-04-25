@@ -26,7 +26,7 @@ namespace _Project.Scripts.UI.StateMachine
         {
             foreach (var view in _views)
             {
-                UnityEngine.Object.Destroy(view.gameObject);
+                view.SetDisable();
             }
             
             _views.Clear();
