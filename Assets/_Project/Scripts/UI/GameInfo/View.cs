@@ -14,31 +14,37 @@ namespace _Project.Scripts.UI
 
         private Tween _tweener;
 
-        protected virtual void Start()
+        private void OnEnable()
         {
             if (_ignoreSetVisible)
             {
                 return;
             }
+            
             _canvasGroup.alpha = 0f;
-            SetVisible(true);
+            SetEnable();
         }
 
-        protected virtual void OnDestroy()
+        private void SetEnable()
+        {
+            _tweener = _canvasGroup.DOFade(1, _durationVisible)
+                .SetEase(Ease.Linear)
+                .OnComplete(()=> _tweener = null);
+        }
+
+        public void SetDisable()
+        {
+            _tweener = _canvasGroup.DOFade(0, _durationVisible)
+                .SetEase(Ease.Linear)
+                .OnComplete(()=> Destroy(gameObject));
+        }
+
+        private void OnDestroy()
         {
             if (_tweener != null)
             {
                 DOTween.Kill(_tweener);
             }
-        }
-
-        private void SetVisible(bool isVisible)
-        {
-            var visibleValue = isVisible ? 1 : 0;
-
-            _tweener = _canvasGroup?.DOFade(visibleValue, _durationVisible)
-                .SetEase(Ease.Linear)
-                .OnComplete(()=> _tweener = null);
         }
     }
 

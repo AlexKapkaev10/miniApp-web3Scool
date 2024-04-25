@@ -19,7 +19,6 @@ namespace _Project.Scripts.UI
         private IObjectResolver _resolver = default;
         private IViewState _currentViewState = default;
         private ViewStateType _currentStateType = ViewStateType.None;
-        private View _gameInfo = default;
 
         [Inject]
         private void Construct(IObjectResolver resolver, ViewsStateMachineConfig config)
@@ -31,8 +30,6 @@ namespace _Project.Scripts.UI
         private void Awake()
         {
             CreateMachine();
-            _gameInfo = _resolver.Instantiate(_config.GetViewPrefabByType(ViewType.GameInfo), null);
-            SwitchStateByType(ViewStateType.Home);
         }
 
         public void CreateViews()

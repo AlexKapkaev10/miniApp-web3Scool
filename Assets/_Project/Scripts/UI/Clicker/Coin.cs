@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 namespace _Project.Scripts.UI
 {
-    public class Coin : MonoBehaviour, IPointerDownHandler, IClickerItem
+    public class Coin : MonoBehaviour, IPointerClickHandler, IClickerItem
     {
         public event Action ClickItem;
         [SerializeField] private ClickerItemConfig _config;
@@ -46,8 +46,8 @@ namespace _Project.Scripts.UI
                 .SetEase(Ease.Linear)
                 .OnComplete(() => _tweener = null);
         }
-
-        public void OnPointerDown(PointerEventData eventData)
+        
+        public void OnPointerClick(PointerEventData eventData)
         {
             ClickItem?.Invoke();
             IAnimateItem flyEffect = _pool.GetFreeElement();

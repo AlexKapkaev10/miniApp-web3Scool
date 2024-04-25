@@ -19,7 +19,7 @@ public class TonConnectHandler : MonoBehaviour
 
     [Header("TonConnect Settings")]
     [Tooltip("Url to the manifest with the Dapp metadata that will be displayed in the user's wallet.")]
-    public string ManifestURL = "";
+    private string ManifestURL = "https://abnormally-open-beetle.ngrok-free.app3000/tonconnect-manifest.json";
     [Tooltip("Redefine wallets list source URL.Must be a link to a json file with following structure - https://github.com/ton-connect/wallets-list (optional)")]
     public string WalletsListSource = "";
     [Tooltip("Wallets list cache time to live in milliseconds. (optional)")]

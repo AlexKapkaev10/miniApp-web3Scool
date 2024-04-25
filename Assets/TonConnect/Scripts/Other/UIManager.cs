@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TonConnectHandler tonConnectHandler;
 
     [SerializeField] private TMP_Text _text;
+    [SerializeField] private UnityEngine.UI.Button _buttonConnect;
     
     private void Awake()
     {
@@ -43,6 +44,7 @@ public class UIManager : MonoBehaviour
             CloseConnectModal();
             DisableConnectWalletButton();
             _text.SetText(ProcessWalletAddress(wallet.Account.Address.ToString(AddressType.Base64)));
+            _buttonConnect.gameObject.SetActive(false);
             //EnableWalletInfoButton(ProcessWalletAddress(wallet.Account.Address.ToString(AddressType.Base64)));
         }
         else
