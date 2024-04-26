@@ -14,11 +14,12 @@ namespace _Project.Scripts.UI
     
     public class ViewsStateMachine : MonoBehaviour, IViewsStateMachine
     {
-        private Dictionary<ViewStateType, IViewState> _dictionaryStates;
         private ViewsStateMachineConfig _config = default;
+        private Dictionary<ViewStateType, IViewState> _dictionaryStates;
         private IObjectResolver _resolver = default;
         private IViewState _currentViewState = default;
         private ViewStateType _currentStateType = ViewStateType.None;
+        private ISwitchViewMenu _switchViewMenu;
 
         [Inject]
         private void Construct(IObjectResolver resolver, ViewsStateMachineConfig config)
@@ -29,6 +30,13 @@ namespace _Project.Scripts.UI
 
         private void Awake()
         {
+            if (_config.IsCheckFps)
+            {
+                Instantiate(_config.GetViewPrefabByType(ViewType.CheckFPS), null);
+            }
+
+            _switchViewMenu = _resolver.Instantiate(_config.GetViewPrefabByType(ViewType.SwitchViewMenu), null) as SwitchViewMenu;
+            
             CreateMachine();
         }
 
@@ -70,7 +78,8 @@ namespace _Project.Scripts.UI
             _dictionaryStates = new Dictionary<ViewStateType, IViewState>
             {
                 { ViewStateType.Home , new HomeViewState(_resolver, _config)},
-                { ViewStateType.Activity , new ActivityViewState(_resolver, _config)}
+                { ViewStateType.Activity , new ActivityViewState(_resolver, _config)},
+                { ViewStateType.Clicker , new ClickerViewState(_resolver, _config)}
             };
         }
     }
@@ -79,6 +88,8 @@ namespace _Project.Scripts.UI
     {
         None,
         Home,
-        Activity
+        Activity,
+        Clicker,
+        Farm
     }
 }

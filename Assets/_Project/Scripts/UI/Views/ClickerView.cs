@@ -6,36 +6,37 @@ using VContainer;
 
 namespace _Project.Scripts.UI
 {
-    public class ClickerView : View
+    public interface IClickerView
+    {
+        
+    }
+    
+    public class ClickerView : View, IClickerView
     {
         [SerializeField] private Coin _coin;
         [SerializeField] private TMP_Text _textCoinCount;
         
-        private IBankModel _bankModel = default;
         private IBankPresenter _bankPresenter = default;
         private IAudioController _audioController = default;
         
         [Inject]
-        private void Construct(
-            IBankModel bankModel, 
-            IAudioController audioController, 
-            IBankPresenter bankPresenter)
+        private void Construct(IAudioController audioController, IBankPresenter bankPresenter)
         {
-            _bankModel = bankModel;
             _audioController = audioController;
             _bankPresenter = bankPresenter;
         }
 
         private void Awake()
         {
-            _audioController.SetFxClip(SoundMode.ClickCoin);
-            _audioController.SetAmbientClip(SoundMode.ClickerAmbient);
+            _audioController.SetFxClip(AudioMode.ClickCoin);
+            _audioController.SetAmbientClip(AudioMode.ClickerAmbient);
             _audioController.PlayAmbientClip();
         }
-        
-        private void OnEnable()
+
+        protected override void OnEnable()
         {
-            _textCoinCount.SetText(_bankModel.GameCoinCount.ToString());
+            base.OnEnable();
+            UpdateCoinsText(_bankPresenter.GetGameCoinCount());
             _bankPresenter.GameCoinValueChange += UpdateCoinsText;
             _coin.ClickItem += CoinOnCoinClick;
         }
@@ -53,7 +54,7 @@ namespace _Project.Scripts.UI
 
         private void CoinOnCoinClick()
         {
-            _bankModel.SetGameCoins(1);
+            _bankPresenter.AddGameCoin(1);
             _audioController.PlayFXClip();
             _coin.ClickAnimation();
         }

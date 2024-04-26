@@ -7,8 +7,8 @@ namespace _Project.Scripts.Audio
 {
     public interface IAudioController
     {
-        void SetFxClip(in SoundMode mode);
-        void SetAmbientClip(in SoundMode clip);
+        void SetFxClip(in AudioMode mode);
+        void SetAmbientClip(in AudioMode clip);
         void PlayFXClip();
         void PlayAmbientClip();
     }
@@ -27,12 +27,12 @@ namespace _Project.Scripts.Audio
             _config.InitConfig();
         }
         
-        public void SetFxClip(in SoundMode mode)
+        public void SetFxClip(in AudioMode mode)
         {
             _audioSourceFX.clip = _config.GetClipByMode(mode);
         }
         
-        public void SetAmbientClip(in SoundMode mode)
+        public void SetAmbientClip(in AudioMode mode)
         {
             var clip =  _config.GetClipByMode(mode);
             if (clip)

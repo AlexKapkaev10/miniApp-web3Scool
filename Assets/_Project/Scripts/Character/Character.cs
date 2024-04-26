@@ -1,17 +1,20 @@
-using _Project.Scripts.Character.Skin;
+using System;
+using _Project.Scripts.GameCharacter.Skin;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace _Project.Scripts.Character
+namespace _Project.Scripts.GameCharacter
 {
     public interface ICharacter
     {
-        
+        event Action Click;
     }
     
     public class Character : MonoBehaviour, ICharacter, IPointerClickHandler
     {
+        public event Action Click;
+        
         [SerializeField] private CharacterSkin _skinPrefab;
         private ICharacterSkin _characterSkin;
 
@@ -41,6 +44,7 @@ namespace _Project.Scripts.Character
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            Click?.Invoke();
             _characterSkin.PlayClickAnimation();
         }
     }

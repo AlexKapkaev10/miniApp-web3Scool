@@ -1,13 +1,13 @@
 using System;
-using _Project.Scripts.UI;
 
 namespace _Project.Scripts.Bank
 {
     public interface IBankPresenter
     {
         event Action<string> GameCoinValueChange;
-        void SetView(IGameInfoView view);
-        void CheckUpdate();
+        string GetGameCoinCount();
+        void InitModel();
+        void AddGameCoin(int count);
     }
     
     public class BankPresenter : IBankPresenter
@@ -15,27 +15,31 @@ namespace _Project.Scripts.Bank
         public event Action<string> GameCoinValueChange;
         
         private readonly IBankModel _model;
-        private IGameInfoView _view;
-        
+
         public BankPresenter(IBankModel model)
         {
             _model = model;
             _model.GameCoinValueChange += OnGameCoinValueChange;
         }
 
+        public string GetGameCoinCount()
+        {
+            return _model.GameCoinCount.ToString();
+        }
+
+        public void InitModel()
+        {
+            _model.Init();
+        }
+
+        public void AddGameCoin(int count)
+        {
+            _model.SetGameCoins(count);
+        }
+
         private void OnGameCoinValueChange(int value)
         {
             GameCoinValueChange?.Invoke(value.ToString());
-        }
-
-        public void SetView(IGameInfoView view)
-        {
-            _view = view;
-        }
-
-        public void CheckUpdate()
-        {
-            _view?.UpdateCoinsText(_model.GameCoinCount.ToString());
         }
     }
 }
