@@ -14,3 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ClickCoinClip>k__BackingField: {fileID: 8300000, guid: d147d9993923b604eb31eb6f4da77c56, type: 3}
   <ClickerAmbientClip>k__BackingField: {fileID: 0}
+  _audioClipsData:
+  - AudioMode: 1
+    AudioClip: {fileID: 8300000, guid: d147d9993923b604eb31eb6f4da77c56, type: 3}
+  - AudioMode: 2
+    AudioClip: {fileID: 0}
+  - AudioMode: 3
+    AudioClip: {fileID: 0}

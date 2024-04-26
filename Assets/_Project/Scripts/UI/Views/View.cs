@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -14,13 +13,13 @@ namespace _Project.Scripts.UI
 
         private Tween _tweener;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             if (_ignoreSetVisible)
             {
                 return;
             }
-            
+
             _canvasGroup.alpha = 0f;
             SetEnable();
         }
@@ -32,7 +31,7 @@ namespace _Project.Scripts.UI
                 .OnComplete(()=> _tweener = null);
         }
 
-        public void SetDisable()
+        public virtual void SetDisable()
         {
             _tweener = _canvasGroup.DOFade(0, _durationVisible)
                 .SetEase(Ease.Linear)
@@ -55,6 +54,9 @@ namespace _Project.Scripts.UI
         Clicker,
         GameInfo,
         Loader,
-        GradientBg
+        GradientBg,
+        Activity,
+        CheckFPS,
+        SwitchViewMenu
     }
 }

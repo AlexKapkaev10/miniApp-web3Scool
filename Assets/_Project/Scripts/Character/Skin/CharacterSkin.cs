@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Scripts.Character.Skin
+namespace _Project.Scripts.GameCharacter.Skin
 {
     public interface ICharacterSkin
     {

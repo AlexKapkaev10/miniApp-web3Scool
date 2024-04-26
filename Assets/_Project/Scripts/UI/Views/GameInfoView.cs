@@ -5,12 +5,7 @@ using VContainer;
 
 namespace _Project.Scripts.UI
 {
-    public interface IGameInfoView
-    {
-        void UpdateCoinsText(string coinsText);
-    }
-    
-    public class GameInfoView : View, IGameInfoView
+    public class GameInfoView : View
     {
         [SerializeField] private TMP_Text _textCoins;
         
@@ -20,12 +15,12 @@ namespace _Project.Scripts.UI
         private void Construct(IBankPresenter presenter)
         {
             _presenter = presenter;
-            _presenter.SetView(this);
         }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            _presenter.CheckUpdate();
+            base.OnEnable();
+            UpdateCoinsText(_presenter.GetGameCoinCount());
             _presenter.GameCoinValueChange += UpdateCoinsText;
         }
 

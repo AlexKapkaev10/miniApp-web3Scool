@@ -1,5 +1,8 @@
 using _Project.Scripts.Bank;
+using _Project.Scripts.SaveLoad;
+using _Project.Scripts.Scene;
 using _Project.Scripts.Skills;
+using Unity.VisualScripting;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,8 +17,8 @@ namespace _Project.Scripts.Core
         protected override void Configure(IContainerBuilder builder)
         {
             base.Configure(builder);
-            RegisterServices(builder);
             RegisterBank(builder);
+            RegisterServices(builder);
         }
         
         private void RegisterBank(IContainerBuilder builder)
@@ -28,6 +31,12 @@ namespace _Project.Scripts.Core
         
         private void RegisterServices(IContainerBuilder builder)
         {
+            builder.Register<SceneService>(Lifetime.Singleton)
+                .As<ISceneService>();
+            
+            builder.Register<SaveLoadServiceSimple>(Lifetime.Singleton)
+                .As<ISaveLoadService>();
+            
             builder.Register<SkillsService>(Lifetime.Singleton)
                 .As<ISkillsService>()
                 .WithParameter(_skillsServiceConfig);

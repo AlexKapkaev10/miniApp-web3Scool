@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,28 +9,39 @@ namespace _Project.Scripts.Audio
     {
         [field: SerializeField] public AudioClip ClickCoinClip { get; private set; }
         [field: SerializeField] public AudioClip ClickerAmbientClip { get; private set; }
+
+        [SerializeField] private AudioModeData[] _audioClipsData;
         
-        private Dictionary<SoundMode, AudioClip> _audioClipDictionary;
+        private Dictionary<AudioMode, AudioClip> _audioClipDictionary;
 
         public void InitConfig()
         {
-            _audioClipDictionary = new Dictionary<SoundMode, AudioClip>
+            _audioClipDictionary = new Dictionary<AudioMode, AudioClip>();
+            
+            foreach (var data in _audioClipsData)
             {
-                { SoundMode.ClickCoin, ClickCoinClip },
-                { SoundMode.ClickerAmbient, ClickerAmbientClip }
-            };
+                _audioClipDictionary.Add(data.AudioMode, data.AudioClip);
+            }
         }
 
-        public AudioClip GetClipByMode(SoundMode mode)
+        public AudioClip GetClipByMode(AudioMode mode)
         {
             return _audioClipDictionary.TryGetValue(mode, out AudioClip clip) ? clip : null;
         }
     }
 
-    public enum SoundMode
+    [Serializable]
+    public struct AudioModeData
+    {
+        public AudioMode AudioMode;
+        public AudioClip AudioClip;
+    }
+
+    public enum AudioMode
     {
         Home,
         ClickCoin,
-        ClickerAmbient
+        ClickerAmbient,
+        CharacterClick
     }
 }

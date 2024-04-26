@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Scripts.UI.SwitchViewMenu
+namespace _Project.Scripts.UI
 {
     public interface ISwitchViewItem
     {

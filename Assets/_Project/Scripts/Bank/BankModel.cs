@@ -1,5 +1,6 @@
 using System;
-using UnityEngine;
+using _Project.Scripts.SaveLoad;
+using VContainer;
 
 namespace _Project.Scripts.Bank
 {
@@ -7,6 +8,7 @@ namespace _Project.Scripts.Bank
     {
         event Action<int> GameCoinValueChange;
         int GameCoinCount { get; }
+        void Init();
         void SetGameCoins(int value);
     }
 
@@ -14,20 +16,26 @@ namespace _Project.Scripts.Bank
     {
         public event Action<int> GameCoinValueChange;
 
+        private readonly ISaveLoadService _saveLoadService;
         private int _gameCoinCount;
-        private const string _saveKey = "saveGameCoinCount";
 
         public int GameCoinCount => _gameCoinCount;
 
-        public BankModel()
+        [Inject]
+        public BankModel(ISaveLoadService saveLoadService)
         {
-            _gameCoinCount = PlayerPrefs.GetInt(_saveKey, 0);
+            _saveLoadService = saveLoadService;
+        }
+
+        public void Init()
+        {
+            _gameCoinCount = _saveLoadService.LoadCoinsCount();
         }
 
         public void SetGameCoins(int value)
         {
             _gameCoinCount += value;
-            PlayerPrefs.SetInt(_saveKey, _gameCoinCount);
+            _saveLoadService.SaveCoinsCount(_gameCoinCount);
             GameCoinValueChange?.Invoke(_gameCoinCount);
         }
     }
