@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Project/Level/Scenes/Bootstrap.unity
-    guid: 944ab8246a6333f41a9fcce910627eb8
+    path: Assets/_Project/Level/Scenes/LoaderYG.unity
+    guid: 77d0ba2db51db7944bef3b045896cc4b
   - enabled: 1
-    path: Assets/_Project/Level/Scenes/Game.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/_Project/Level/Scenes/GameYG.unity
+    guid: 3f2f1c9b615bd984da8164dbe77f3cd7
   m_configObjects: {}
