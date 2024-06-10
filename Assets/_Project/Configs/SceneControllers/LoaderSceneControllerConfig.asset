@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LoaderSceneControllerConfig
   m_EditorClassIdentifier: 
   <LoaderView>k__BackingField: {fileID: 2960759740078323887, guid: 5a4bb775bd9c6cd4ea4fb7575b172d0a, type: 3}
-  <NextScene>k__BackingField: Game
+  <NextScene>k__BackingField: GameYG

@@ -57,6 +57,7 @@ namespace _Project.Scripts.UI
         GradientBg,
         Activity,
         CheckFPS,
-        SwitchViewMenu
+        SwitchViewMenu,
+        SkinsShop
     }
 }

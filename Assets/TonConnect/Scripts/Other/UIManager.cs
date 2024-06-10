@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using TonSdk.Connect;
 using TonSdk.Core;
 using UnityEngine;
@@ -14,8 +13,7 @@ public class UIManager : MonoBehaviour
     public bool UseSavedWalletIcons = true;
     [Tooltip("Wallet icons. Works only if UseSavedWalletIcons is enabled.")]
     public List<Sprite> WalletIcons = new ();
-    private List<string> WalletsIconsList = new () 
-        {"tonkeeper", "tonhub", "openmask", "dewallet", "mytonwallet", "tonflow", "tonwallet", "xtonwallet"};
+    private List<string> WalletsIconsList = new () {"tonkeeper", "tonhub", "openmask", "dewallet", "mytonwallet", "tonflow", "tonwallet", "xtonwallet"};
 
     [Header("UI References")]
     [SerializeField] private UIDocument document;
@@ -23,9 +21,6 @@ public class UIManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private TonConnectHandler tonConnectHandler;
-
-    [SerializeField] private TMP_Text _text;
-    [SerializeField] private UnityEngine.UI.Button _buttonConnect;
     
     private void Awake()
     {
@@ -33,7 +28,7 @@ public class UIManager : MonoBehaviour
         TonConnectHandler.OnProviderStatusChangedError += OnProviderStatusChangeError;
         DisableSendTXModal();
         DisableWalletInfoButton();
-        //EnableConnectWalletButton();
+        EnableConnectWalletButton();
     }
 
     private void OnProviderStatusChange(Wallet wallet)
@@ -43,9 +38,7 @@ public class UIManager : MonoBehaviour
             Debug.Log("Wallet connected. Address: " + wallet.Account.Address + ". Platform: " + wallet.Device.Platform + "," + wallet.Device.AppName + "," + wallet.Device.AppVersion);
             CloseConnectModal();
             DisableConnectWalletButton();
-            _text.SetText(ProcessWalletAddress(wallet.Account.Address.ToString(AddressType.Base64)));
-            _buttonConnect.gameObject.SetActive(false);
-            //EnableWalletInfoButton(ProcessWalletAddress(wallet.Account.Address.ToString(AddressType.Base64)));
+            EnableWalletInfoButton(ProcessWalletAddress(wallet.Account.Address.ToString(AddressType.Base64)));
         }
         else
         {

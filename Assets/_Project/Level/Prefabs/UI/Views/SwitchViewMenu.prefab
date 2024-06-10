@@ -513,7 +513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4315884986704794134, guid: b546b0e0b699fff48ab3dcc81606128d, type: 3}
       propertyPath: _stateType
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6249274147054020939, guid: b546b0e0b699fff48ab3dcc81606128d, type: 3}
       propertyPath: m_TargetGraphic
@@ -529,7 +529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8642256983833379549, guid: b546b0e0b699fff48ab3dcc81606128d, type: 3}
       propertyPath: m_text
-      value: Daily
+      value: Shop
       objectReference: {fileID: 0}
     - target: {fileID: 8777069398961880062, guid: b546b0e0b699fff48ab3dcc81606128d, type: 3}
       propertyPath: m_SizeDelta.x

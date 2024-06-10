@@ -1,6 +1,6 @@
-using System;
 using _Project.Scripts.Audio;
 using _Project.Scripts.Configs.Views;
+using _Project.Scripts.Skills;
 using _Project.Scripts.UI;
 using UnityEngine;
 using VContainer;
@@ -11,11 +11,14 @@ namespace _Project.Scripts.GameCharacter
     {
         [SerializeField] private CharacterViewConfig _config;
         [SerializeField] private RectTransform _characterParent;
+
+        private IActionButton _skillUpgradeButton;
         private IAudioController _audioController;
+        private ISkillsService _skillsService;
         private ICharacter _character;
         
         [Inject]
-        private void Construct(IAudioController audioController)
+        private void Construct(IAudioController audioController, ISkillsService skillsService)
         {
             _audioController = audioController;
             _audioController.SetFxClip(AudioMode.CharacterClick);
@@ -36,6 +39,16 @@ namespace _Project.Scripts.GameCharacter
         private void OnClickCharacter()
         {
             _audioController.PlayFXClip();
+            if (_skillUpgradeButton == null)
+            {
+                _skillUpgradeButton = Instantiate(_config.ActionButtonPrefab, transform);
+                _skillUpgradeButton.SetActive(true);
+            }
+            else
+            {
+                _skillUpgradeButton.SetActive(false);
+                _skillUpgradeButton = null;
+            }
         }
 
         private void Awake()

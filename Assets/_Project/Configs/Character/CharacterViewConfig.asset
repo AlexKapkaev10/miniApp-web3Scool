@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4330575321a047b6a237fd4a443adbd3, type: 3}
   m_Name: CharacterViewConfig
   m_EditorClassIdentifier: 
+  <ActionButtonPrefab>k__BackingField: {fileID: 2146020696629213986, guid: d3e5c033630b74647ac9ab1cc3cf5f62, type: 3}
   <CharacterPrefab>k__BackingField: {fileID: 7498577596610306884, guid: 1dfaa0b4b05ea9d46b9b2b2758c229ec, type: 3}
