@@ -79,7 +79,8 @@ namespace _Project.Scripts.UI
             {
                 { ViewStateType.Home , new HomeViewState(_resolver, _config)},
                 { ViewStateType.Activity , new ActivityViewState(_resolver, _config)},
-                { ViewStateType.Clicker , new ClickerViewState(_resolver, _config)}
+                { ViewStateType.Clicker , new ClickerViewState(_resolver, _config)},
+                { ViewStateType.Quest , new QuestViewState(_resolver, _config)}
             };
         }
     }
@@ -90,6 +91,7 @@ namespace _Project.Scripts.UI
         Home,
         Activity,
         Clicker,
-        Farm
+        Farm,
+        Quest
     }
 }
